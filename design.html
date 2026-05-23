@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>つくる帖 — レシピサイト</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="theme.css" />
+<style>
+  body { margin: 0; font-family: 'Noto Serif JP', serif; }
+</style>
+
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#faf6ec"/>
+    <text x="50" y="58" text-anchor="middle" font-family="serif" font-weight="700" font-size="22" fill="#b8442a">帖</text>
+    <text x="50" y="80" text-anchor="middle" font-family="sans-serif" font-size="6" letter-spacing="2" fill="#6b6353">TSUKURU-CHO</text>
+  </svg>
+</template>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="image-slot.js"></script>
+<script src="data.js"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="shared.jsx"></script>
+<script type="text/babel" src="screens/list.jsx"></script>
+<script type="text/babel" src="screens/detail-shared.jsx"></script>
+<script type="text/babel" src="screens/detail-tabs.jsx"></script>
+<script type="text/babel" src="screens/detail-accordion.jsx"></script>
+<script type="text/babel" src="screens/detail-scroll.jsx"></script>
+<script type="text/babel" src="screens/cooking-mode.jsx"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "listLayoutFocus": "grid",
+  "showCookingMode": true
+}/*EDITMODE-END*/;
+
+function Wrap({ children }) {
+  // Each artboard mounts an IOSDevice with a screen inside.
+  return (
+    <IOSDevice width={402} height={874}>
+      {children}
+    </IOSDevice>
+  );
+}
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  return (
+    <>
+      <DesignCanvas>
+        <DCSection id="list" title="一覧ページ" subtitle="ホーム — レシピを探す画面。2案で比較">
+          <DCArtboard id="list-grid" label="A · 2列グリッド（写真主役）" width={402} height={874}>
+            <Wrap><ListScreen layout="grid" /></Wrap>
+          </DCArtboard>
+          <DCArtboard id="list-row" label="B · 横並びリスト（情報量多め）" width={402} height={874}>
+            <Wrap><ListScreen layout="list" /></Wrap>
+          </DCArtboard>
+        </DCSection>
+
+        <DCSection id="detail" title="詳細ページ" subtitle="情報量が多いので、整理方法を3案">
+          <DCArtboard id="detail-tabs" label="A · タブ切り替え" width={402} height={874}>
+            <Wrap><DetailTabs /></Wrap>
+          </DCArtboard>
+          <DCArtboard id="detail-accordion" label="B · アコーディオン" width={402} height={874}>
+            <Wrap><DetailAccordion /></Wrap>
+          </DCArtboard>
+          <DCArtboard id="detail-scroll" label="C · 長尺スクロール＋目次" width={402} height={874}>
+            <Wrap><DetailScroll /></Wrap>
+          </DCArtboard>
+        </DCSection>
+
+        <DCSection id="cook" title="料理中モード" subtitle="工程を1画面ずつ。画面常時オン・大きな文字・チェックボックス">
+          <DCArtboard id="cook-mode" label="ステッパー型" width={402} height={874}>
+            <Wrap><CookingMode /></Wrap>
+          </DCArtboard>
+        </DCSection>
+
+        <DCPostIt top={140} left={20} rotate={-3} width={210}>
+          和モダン｜生成り＋墨＋朱の差し色。{'\n'}
+          Noto Serif JP / Shippori Mincho。{'\n'}
+          ヒーロー画像は image-slot で差し替え可。
+        </DCPostIt>
+      </DesignCanvas>
+
+      <TweaksPanel title="Tweaks">
+        <TweakSection title="一覧ページ">
+          <TweakRadio
+            label="レイアウト"
+            value={t.listLayoutFocus}
+            options={[
+              { value: 'grid', label: '2列グリッド' },
+              { value: 'row',  label: '横並びリスト' },
+            ]}
+            onChange={v => setTweak('listLayoutFocus', v)}
+          />
+        </TweakSection>
+        <TweakSection title="詳細ページ" subtitle="3案を画面上で並べて比較できます。各アートボードをクリックでフルスクリーン表示">
+          <div style={{ fontSize: 11, color: '#6b6353', lineHeight: 1.6, fontFamily: '-apple-system, system-ui' }}>
+            タブ案 / アコーディオン案 / スクロール案 を並列表示中。{'\n'}
+            アートボード右上の ⤢ で個別に拡大できます。
+          </div>
+        </TweakSection>
+        <TweakSection title="料理中モード">
+          <TweakToggle
+            label="表示する"
+            value={t.showCookingMode}
+            onChange={v => setTweak('showCookingMode', v)}
+          />
+        </TweakSection>
+      </TweaksPanel>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
