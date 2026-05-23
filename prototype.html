@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>橋本先生 レシピ — つくる帖</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="theme.css" />
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; background: #1a1714; font-family: 'Noto Serif JP', serif; }
+  #root { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 24px; box-sizing: border-box; }
+
+  /* Page chrome around the device */
+  .stage { display: flex; gap: 56px; align-items: center; }
+  .stage-side { color: rgba(250,246,236,0.55); font-family: 'Noto Serif JP', serif; max-width: 240px; }
+  .stage-side .eyebrow { font-family: 'Noto Sans JP', sans-serif; font-size: 10px; letter-spacing: 0.3em; color: rgba(250,246,236,0.4); margin-bottom: 14px; }
+  .stage-side h1 { font-size: 28px; font-weight: 600; letter-spacing: 0.04em; color: #faf6ec; margin: 0 0 12px; line-height: 1.3; }
+  .stage-side p { font-size: 12px; line-height: 1.8; letter-spacing: 0.02em; color: rgba(250,246,236,0.55); margin: 0 0 18px; }
+  .stage-side .nav { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
+  .stage-side .nav button {
+    background: transparent; border: 1px solid rgba(250,246,236,0.15); color: rgba(250,246,236,0.7);
+    padding: 10px 14px; font-family: 'Noto Serif JP', serif; font-size: 13px;
+    letter-spacing: 0.12em; cursor: pointer; text-align: left; transition: all 0.15s;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .stage-side .nav button.active { border-color: #b8442a; color: #faf6ec; background: rgba(184,68,42,0.1); }
+  .stage-side .nav button:hover { border-color: rgba(184,68,42,0.5); color: #faf6ec; }
+  .stage-side .nav .num { font-family: 'Noto Sans JP'; font-size: 10px; opacity: 0.6; min-width: 14px; }
+
+  @media (max-width: 900px) {
+    .stage { flex-direction: column; gap: 24px; }
+    .stage-side { max-width: 360px; text-align: center; }
+    .stage-side .nav { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+  }
+
+  /* Screen transitions */
+  .screen-fade { animation: screen-fade-in 0.25s ease-out; }
+  @keyframes screen-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#faf6ec"/>
+    <text x="50" y="58" text-anchor="middle" font-family="serif" font-weight="700" font-size="22" fill="#b8442a">帖</text>
+    <text x="50" y="80" text-anchor="middle" font-family="sans-serif" font-size="6" letter-spacing="2" fill="#6b6353">TSUKURU-CHO</text>
+  </svg>
+</template>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="image-slot.js"></script>
+<script src="data.js"></script>
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="shared.jsx"></script>
+<script type="text/babel" src="screens/list.jsx"></script>
+<script type="text/babel" src="screens/detail-shared.jsx"></script>
+<script type="text/babel" src="screens/detail-tabs.jsx"></script>
+<script type="text/babel" src="screens/cooking-mode.jsx"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "darkChrome": true
+}/*EDITMODE-END*/;
+
+function Prototype() {
+  // screen: 'list' | 'detail' | 'cooking'
+  const [screen, setScreen] = React.useState('list');
+  const [, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  const go = (s) => setScreen(s);
+
+  const screens = [
+    { key: 'list',    no: '01', label: '一覧（横並びリスト）' },
+    { key: 'detail',  no: '02', label: '詳細（タブ切り替え）' },
+    { key: 'cooking', no: '03', label: '料理中モード' },
+  ];
+
+  return (
+    <div className="stage">
+      <aside className="stage-side" data-screen-label="prototype-info">
+        <div className="eyebrow">RECIPE — PROTOTYPE</div>
+        <h1>橋本先生の<br/>つくる帖</h1>
+        <p>
+          和モダンのレシピサイト。<br/>
+          一覧 → 詳細 → 料理中モード の3画面を行き来できるプロトタイプです。
+          画面内のボタン（戻る・「料理を はじめる」など）も実際に動きます。
+        </p>
+        <div className="nav">
+          {screens.map(s => (
+            <button key={s.key} onClick={() => go(s.key)} className={screen === s.key ? 'active' : ''}>
+              <span className="num">{s.no}</span>
+              <span>{s.label}</span>
+            </button>
+          ))}
+        </div>
+      </aside>
+
+      <div data-screen-label={'screen-' + screen}>
+        <IOSDevice width={402} height={874}>
+          <div key={screen} className="screen-fade" style={{ height: '100%' }}>
+            {screen === 'list' && (
+              <ListScreen layout="list" onOpenRecipe={() => go('detail')} />
+            )}
+            {screen === 'detail' && (
+              <DetailTabs onBack={() => go('list')} onStartCooking={() => go('cooking')} />
+            )}
+            {screen === 'cooking' && (
+              <CookingMode showTimer={false} onClose={() => go('detail')} />
+            )}
+          </div>
+        </IOSDevice>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Prototype />);
+</script>
+</body>
+</html>
