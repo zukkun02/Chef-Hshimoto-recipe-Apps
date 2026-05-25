@@ -8,14 +8,19 @@ const PROPS = PropertiesService.getScriptProperties();
 
 function doPost(e) {
   try {
-    const body = JSON.parse(e.postData.contents);
+    const body = e.postData ? JSON.parse(e.postData.contents) : {};
 
-    // 1. シグネチャ検証
-    if (body.secret !== PROPS.getProperty('WEBHOOK_SECRET')) {
+    // 1. シグネチャ検証（URL query > body の優先で受け取る）
+    const providedSecret = (e.parameter && e.parameter.secret) || body.secret;
+    if (providedSecret !== PROPS.getProperty('WEBHOOK_SECRET')) {
       return jsonResponse({ ok: false, error: 'unauthorized' });
     }
 
-    const pageId = body.page_id || body.data?.id;
+    // 2. ページID取得（Notion Automation の body.data.id を含む複数形式に対応）
+    const pageId = (e.parameter && e.parameter.page_id)
+      || body.page_id
+      || (body.data && body.data.id)
+      || body.id;
     if (!pageId) throw new Error('page_id missing');
 
     // 2. メインフロー
