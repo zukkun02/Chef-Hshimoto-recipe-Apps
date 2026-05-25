@@ -10,6 +10,7 @@
   body { margin: 0; }
   .paper-wrap { min-height: 100vh; padding: 0 0 80px; }
 
+  /* ── Topbar ─────────────────────────────────── */
   .topbar {
     position: sticky; top: 0; z-index: 10;
     background: rgba(250,246,236,0.92);
@@ -40,6 +41,65 @@
 
   .container { max-width: 1080px; margin: 0 auto; padding: 24px 20px; }
 
+  /* ── Search & Filter ─────────────────────────── */
+  .toolbar { margin-bottom: 20px; }
+  .search-wrap { position: relative; margin-bottom: 16px; }
+  .search-input {
+    width: 100%; padding: 14px 16px 14px 44px;
+    border: 1px solid var(--line); border-radius: var(--r-md);
+    background: #fff; color: var(--sumi);
+    font-family: 'Noto Serif JP', serif; font-size: 15px;
+    outline: none; transition: border-color .15s, box-shadow .15s;
+    box-sizing: border-box;
+  }
+  .search-input:focus {
+    border-color: var(--shu); box-shadow: 0 0 0 3px var(--shu-soft);
+  }
+  .search-icon {
+    position: absolute; left: 14px; top: 50%;
+    transform: translateY(-50%); color: var(--muted);
+    font-size: 18px; pointer-events: none;
+  }
+  .search-clear {
+    position: absolute; right: 12px; top: 50%;
+    transform: translateY(-50%);
+    background: none; border: 0; cursor: pointer;
+    color: var(--muted); font-size: 18px;
+    padding: 4px 8px;
+  }
+  .search-clear:hover { color: var(--shu); }
+
+  .filter-group { margin-bottom: 10px; }
+  .filter-label {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11px; color: var(--muted);
+    letter-spacing: 0.1em; margin-right: 10px;
+    text-transform: uppercase;
+  }
+  .filter-chips { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+  .filter-chip {
+    padding: 5px 12px; border-radius: 999px;
+    border: 1px solid var(--line);
+    background: #fff; color: var(--sumi-3);
+    font-family: 'Noto Sans JP', sans-serif; font-size: 12px;
+    cursor: pointer; transition: all .15s;
+    font-weight: 500;
+  }
+  .filter-chip:hover { border-color: var(--shu); color: var(--shu); }
+  .filter-chip.active {
+    background: var(--shu); border-color: var(--shu); color: #fff;
+  }
+  .filter-chip.tea.active { background: var(--tea); border-color: var(--tea); }
+  .filter-count {
+    margin-left: 6px; opacity: 0.7; font-size: 10px;
+  }
+  .result-count {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 12px; color: var(--muted);
+    margin: 16px 0 12px;
+  }
+
+  /* ── Grid & Cards ────────────────────────────── */
   .grid {
     display: grid; gap: 20px;
     grid-template-columns: 1fr;
@@ -98,9 +158,10 @@
   .card-meta span::before { content: '· '; }
   .card-meta span:first-child::before { content: ''; }
 
-  /* Detail */
+  /* ── Detail ───────────────────────────────────── */
   .detail-hero { position: relative; }
-  .detail-hero img {
+  .detail-hero img,
+  .detail-hero .card-img-fallback {
     width: 100%; aspect-ratio: 16/9; object-fit: cover;
     background: var(--kinari);
   }
@@ -176,8 +237,22 @@
     font-family: 'Noto Serif JP', serif; font-size: 13px;
     color: var(--sumi-3); line-height: 1.85;
   }
+  .cta-bar {
+    margin: 28px 0 4px;
+    display: flex; gap: 12px; flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--shu); color: #fff;
+    border: 0; border-radius: var(--r-md);
+    padding: 14px 24px; font-size: 15px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 600; cursor: pointer;
+    transition: background .15s;
+    min-height: 48px;
+  }
+  .btn-primary:hover { background: var(--shu-deep); }
 
-  /* Empty state */
+  /* ── Empty / Loading / NoResults ─────────────── */
   .empty {
     text-align: center; padding: 80px 20px;
     color: var(--sumi-3);
@@ -198,12 +273,111 @@
     color: var(--sumi-3); max-width: 460px;
     margin: 0 auto;
   }
-
   .loading {
     text-align: center; padding: 60px 20px;
     color: var(--muted); font-family: 'Noto Sans JP', sans-serif;
     font-size: 14px;
   }
+
+  /* ── Cooking mode (1工程1画面) ────────────────── */
+  .cook-overlay {
+    position: fixed; inset: 0; z-index: 100;
+    background: var(--washi);
+    display: flex; flex-direction: column;
+  }
+  .cook-header {
+    padding: 18px 20px; border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between;
+    background: #fff;
+  }
+  .cook-progress {
+    display: flex; flex-direction: column; gap: 8px; flex: 1; max-width: 480px;
+  }
+  .cook-title {
+    font-family: 'Shippori Mincho', serif; font-size: 14px;
+    color: var(--sumi-3); margin: 0;
+  }
+  .cook-progress-bar {
+    width: 100%; height: 4px; background: var(--kinari-deep);
+    border-radius: 2px; overflow: hidden;
+  }
+  .cook-progress-fill {
+    height: 100%; background: var(--shu);
+    transition: width .35s ease;
+  }
+  .cook-stepnum {
+    font-family: 'Shippori Mincho', serif;
+    color: var(--shu); font-weight: 700;
+  }
+  .cook-close {
+    background: none; border: 1px solid var(--line);
+    border-radius: 999px; padding: 8px 14px;
+    cursor: pointer; color: var(--sumi-3);
+    font-size: 14px; font-family: 'Noto Sans JP', sans-serif;
+  }
+  .cook-body {
+    flex: 1; padding: 40px 24px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    max-width: 720px; margin: 0 auto;
+    text-align: center;
+  }
+  .cook-stepnum-big {
+    font-family: 'Shippori Mincho', serif;
+    color: var(--shu); font-size: 18px;
+    font-weight: 600; letter-spacing: 0.2em;
+    margin-bottom: 12px;
+  }
+  .cook-step-text {
+    font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
+    font-size: 28px; line-height: 1.7;
+    color: var(--sumi); font-weight: 500;
+    max-width: 640px;
+  }
+  @media (max-width: 600px) {
+    .cook-step-text { font-size: 22px; line-height: 1.7; }
+  }
+  .cook-tip {
+    margin-top: 28px; padding: 12px 16px;
+    background: var(--kinari);
+    border-radius: var(--r-md);
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--sumi-3); font-size: 13px;
+    line-height: 1.7; max-width: 560px;
+  }
+  .cook-tip-label {
+    color: var(--shu); font-weight: 600;
+    margin-right: 6px; font-size: 12px;
+  }
+  .cook-foot {
+    padding: 18px 24px; border-top: 1px solid var(--line);
+    background: #fff;
+    display: flex; gap: 12px; justify-content: space-between;
+    align-items: center; max-width: 720px; margin: 0 auto; width: 100%;
+    box-sizing: border-box;
+  }
+  .cook-nav-btn {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--r-md); padding: 14px 22px;
+    cursor: pointer; min-height: 50px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px; color: var(--sumi);
+    font-weight: 600; flex: 1;
+  }
+  .cook-nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .cook-nav-btn:hover:not(:disabled) {
+    background: var(--kinari); border-color: var(--shu-soft);
+  }
+  .cook-nav-btn.primary {
+    background: var(--shu); color: #fff; border-color: var(--shu);
+  }
+  .cook-nav-btn.primary:hover:not(:disabled) { background: var(--shu-deep); }
+  .cook-wakelock {
+    font-size: 11px; color: var(--muted);
+    display: flex; align-items: center; gap: 6px;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+  .cook-wakelock input { margin: 0; }
 </style>
 </head>
 <body class="paper">
@@ -214,7 +388,40 @@
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin></script>
 
 <script type="text/babel">
-const { useState, useEffect } = React;
+const { useState, useEffect, useMemo, useRef } = React;
+
+/* ============================================================
+   ヘルパー
+   ============================================================ */
+
+// "1. step text\n2. another\n3. ..." を配列に分解
+function parseSteps(markdown) {
+  if (!markdown) return [];
+  const lines = markdown.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+  const steps = [];
+  let current = null;
+  for (const line of lines) {
+    const m = line.match(/^(\d+)\.\s+(.+)$/);
+    if (m) {
+      if (current) steps.push(current);
+      current = m[2];
+    } else if (current) {
+      current += ' ' + line;
+    }
+  }
+  if (current) steps.push(current);
+  return steps;
+}
+
+// 全角・半角・大文字小文字を正規化
+function normalize(s) {
+  return (s || '').toLowerCase().replace(/[Ａ-Ｚａ-ｚ０-９]/g,
+    ch => String.fromCharCode(ch.charCodeAt(0) - 0xFEE0));
+}
+
+/* ============================================================
+   コンポーネント
+   ============================================================ */
 
 function Header() {
   return (
@@ -263,6 +470,45 @@ function Card({ recipe, onClick }) {
   );
 }
 
+function SearchBar({ value, onChange }) {
+  return (
+    <div className="search-wrap">
+      <span className="search-icon">⌕</span>
+      <input
+        type="text"
+        className="search-input"
+        placeholder="レシピを検索（例: 鶏、四川、揚げ物…）"
+        value={value}
+        onChange={e => onChange(e.target.value)}
+      />
+      {value && (
+        <button className="search-clear" onClick={() => onChange('')} title="クリア">✕</button>
+      )}
+    </div>
+  );
+}
+
+function FilterChips({ label, options, selected, onToggle, variant }) {
+  if (options.length === 0) return null;
+  return (
+    <div className="filter-group">
+      <span className="filter-label">{label}</span>
+      <div className="filter-chips">
+        {options.map(opt => (
+          <button
+            key={opt.value}
+            className={`filter-chip ${variant || ''} ${selected.includes(opt.value) ? 'active' : ''}`}
+            onClick={() => onToggle(opt.value)}
+          >
+            {opt.value}
+            <span className="filter-count">{opt.count}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function EmptyState() {
   return (
     <div className="empty">
@@ -272,6 +518,17 @@ function EmptyState() {
         橋本先生が手書きで残してきたレシピを、こちらに少しずつ並べていきます。<br/>
         公開されたレシピがここに掲載されます。
       </p>
+    </div>
+  );
+}
+
+function NoResults({ onClear }) {
+  return (
+    <div className="empty">
+      <div className="empty-icon">∅</div>
+      <h2>該当するレシピが見つかりません</h2>
+      <p>検索キーワードやフィルタを変えてみてください。</p>
+      <button className="btn-primary" style={{marginTop:18}} onClick={onClear}>条件をクリア</button>
     </div>
   );
 }
@@ -290,9 +547,115 @@ function Section({ title, children }) {
   );
 }
 
+/* ============================================================
+   調理モード（1工程1画面）
+   ============================================================ */
+
+function CookingMode({ recipe, onClose }) {
+  const steps = useMemo(() => parseSteps(recipe.steps_md), [recipe.steps_md]);
+  const [idx, setIdx] = useState(0);
+  const [wakeLock, setWakeLock] = useState(false);
+  const wakeRef = useRef(null);
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose();
+      else if (e.key === 'ArrowRight' && idx < steps.length - 1) setIdx(i => i + 1);
+      else if (e.key === 'ArrowLeft' && idx > 0) setIdx(i => i - 1);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [idx, steps.length, onClose]);
+
+  useEffect(() => {
+    if (wakeLock && 'wakeLock' in navigator) {
+      navigator.wakeLock.request('screen').then(lock => { wakeRef.current = lock; }).catch(() => {});
+    } else if (wakeRef.current) {
+      wakeRef.current.release().catch(() => {});
+      wakeRef.current = null;
+    }
+    return () => {
+      if (wakeRef.current) {
+        wakeRef.current.release().catch(() => {});
+        wakeRef.current = null;
+      }
+    };
+  }, [wakeLock]);
+
+  if (steps.length === 0) {
+    return (
+      <div className="cook-overlay">
+        <div className="cook-body">
+          <p className="cook-step-text">調理手順が登録されていません</p>
+          <button className="cook-nav-btn primary" style={{marginTop:24}} onClick={onClose}>戻る</button>
+        </div>
+      </div>
+    );
+  }
+
+  const isLast = idx === steps.length - 1;
+  const isFirst = idx === 0;
+  const progress = ((idx + 1) / steps.length) * 100;
+
+  return (
+    <div className="cook-overlay">
+      <div className="cook-header">
+        <div className="cook-progress">
+          <p className="cook-title">{recipe.title} ・ 調理中</p>
+          <div className="cook-progress-bar">
+            <div className="cook-progress-fill" style={{width: `${progress}%`}}></div>
+          </div>
+        </div>
+        <button className="cook-close" onClick={onClose}>✕ 終了</button>
+      </div>
+
+      <div className="cook-body">
+        <div className="cook-stepnum-big">
+          STEP <span className="cook-stepnum">{idx + 1}</span> / {steps.length}
+        </div>
+        <div className="cook-step-text">{steps[idx]}</div>
+
+        {idx === 0 && recipe.tips_md && (
+          <div className="cook-tip">
+            <span className="cook-tip-label">⚑ 全体のコツ</span>
+            {recipe.tips_md.split('\n').slice(0, 2).join(' ／ ').replace(/^・/g, '').replace(/\n・/g, ' ／ ')}
+          </div>
+        )}
+      </div>
+
+      <div className="cook-foot">
+        <button className="cook-nav-btn" disabled={isFirst} onClick={() => setIdx(i => Math.max(0, i - 1))}>
+          ← 前へ
+        </button>
+        <label className="cook-wakelock">
+          <input type="checkbox" checked={wakeLock} onChange={e => setWakeLock(e.target.checked)} />
+          画面常時オン
+        </label>
+        {isLast ? (
+          <button className="cook-nav-btn primary" onClick={onClose}>完成！</button>
+        ) : (
+          <button className="cook-nav-btn primary" onClick={() => setIdx(i => Math.min(steps.length - 1, i + 1))}>
+            次へ →
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   詳細
+   ============================================================ */
+
 function Detail({ slug, onBack }) {
   const [recipe, setRecipe] = useState(null);
   const [errored, setErrored] = useState(false);
+  const [cooking, setCooking] = useState(false);
 
   useEffect(() => {
     fetch(`/data/recipes/${slug}.json`)
@@ -301,6 +664,8 @@ function Detail({ slug, onBack }) {
       .catch(() => setErrored(true));
   }, [slug]);
 
+  useEffect(() => { window.scrollTo({top: 0, behavior: 'smooth'}); }, [slug]);
+
   if (errored) return (
     <div className="container">
       <button className="back-btn" style={{position:'static',marginBottom:20}} onClick={onBack}>← 戻る</button>
@@ -308,6 +673,8 @@ function Detail({ slug, onBack }) {
     </div>
   );
   if (!recipe) return <Loading />;
+
+  const hasSteps = parseSteps(recipe.steps_md).length > 0;
 
   return (
     <div className="container">
@@ -328,6 +695,12 @@ function Detail({ slug, onBack }) {
             {recipe.servings != null && <div><span className="label">人数</span>{recipe.servings}人分</div>}
             {recipe.source_year_month && <div><span className="label">原典</span>{recipe.source_year_month}</div>}
           </div>
+
+          {hasSteps && (
+            <div className="cta-bar">
+              <button className="btn-primary" onClick={() => setCooking(true)}>▶ 調理を始める</button>
+            </div>
+          )}
 
           <Section title="材料">{recipe.ingredients_md}</Section>
           <Section title="下ごしらえ">{recipe.preparation_md}</Section>
@@ -356,9 +729,99 @@ function Detail({ slug, onBack }) {
           )}
         </div>
       </div>
+
+      {cooking && <CookingMode recipe={recipe} onClose={() => setCooking(false)} />}
     </div>
   );
 }
+
+/* ============================================================
+   一覧 + 検索 + フィルタ
+   ============================================================ */
+
+function ListView({ recipes, onSelect }) {
+  const [query, setQuery] = useState('');
+  const [selCats, setSelCats] = useState([]);
+  const [selRegs, setSelRegs] = useState([]);
+
+  // カテゴリ・地方の集計
+  const { categories, regions } = useMemo(() => {
+    const catMap = {}, regMap = {};
+    for (const r of recipes) {
+      if (r.category) catMap[r.category] = (catMap[r.category] || 0) + 1;
+      for (const reg of (r.region || [])) regMap[reg] = (regMap[reg] || 0) + 1;
+    }
+    return {
+      categories: Object.entries(catMap).map(([value, count]) => ({value, count}))
+        .sort((a, b) => b.count - a.count),
+      regions: Object.entries(regMap).map(([value, count]) => ({value, count}))
+        .sort((a, b) => b.count - a.count)
+    };
+  }, [recipes]);
+
+  // フィルタリング
+  const filtered = useMemo(() => {
+    const q = normalize(query.trim());
+    return recipes.filter(r => {
+      if (selCats.length > 0 && !selCats.includes(r.category)) return false;
+      if (selRegs.length > 0) {
+        const recRegs = r.region || [];
+        if (!selRegs.some(s => recRegs.includes(s))) return false;
+      }
+      if (q) {
+        const hay = normalize([
+          r.title, r.subtitle, r.summary, r.category,
+          ...(r.region || [])
+        ].filter(Boolean).join(' '));
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+  }, [recipes, query, selCats, selRegs]);
+
+  const toggle = (list, setter) => (v) =>
+    setter(list.includes(v) ? list.filter(x => x !== v) : [...list, v]);
+
+  const clearAll = () => { setQuery(''); setSelCats([]); setSelRegs([]); };
+
+  const isFiltered = query || selCats.length || selRegs.length;
+
+  return (
+    <div className="container">
+      <div className="toolbar">
+        <SearchBar value={query} onChange={setQuery} />
+        <FilterChips label="カテゴリ" options={categories} selected={selCats}
+                     onToggle={toggle(selCats, setSelCats)} />
+        <FilterChips label="地方・流派" options={regions} selected={selRegs}
+                     onToggle={toggle(selRegs, setSelRegs)} variant="tea" />
+        {isFiltered && (
+          <div className="result-count">
+            {filtered.length}件のレシピ
+            {(selCats.length || selRegs.length || query) && (
+              <button className="filter-chip" style={{marginLeft:10}} onClick={clearAll}>
+                条件をクリア
+              </button>
+            )}
+          </div>
+        )}
+      </div>
+
+      {filtered.length === 0 ? (
+        <NoResults onClear={clearAll} />
+      ) : (
+        <div className="grid">
+          {filtered.map(r => (
+            <Card key={r.slug} recipe={r} onClick={() => onSelect(r.slug)} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ============================================================
+   ルート
+   ============================================================ */
 
 function App() {
   const [recipes, setRecipes] = useState(null);
@@ -375,17 +838,9 @@ function App() {
     <div className="paper-wrap">
       <Header />
       {view.page === 'list' && (
-        <div className="container">
-          {recipes === null ? <Loading /> :
-            recipes.length === 0 ? <EmptyState /> : (
-            <div className="grid">
-              {recipes.map(r => (
-                <Card key={r.slug} recipe={r}
-                      onClick={() => setView({ page: 'detail', slug: r.slug })} />
-              ))}
-            </div>
-          )}
-        </div>
+        recipes === null ? <Loading /> :
+        recipes.length === 0 ? <EmptyState /> :
+        <ListView recipes={recipes} onSelect={slug => setView({ page: 'detail', slug })} />
       )}
       {view.page === 'detail' && (
         <Detail slug={view.slug} onBack={() => setView({ page: 'list', slug: null })} />
