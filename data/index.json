@@ -1,5 +1,66 @@
 {
-  "updated_at": "",
-  "count": 0,
-  "recipes": []
+  "updated_at": "2026-05-25T06:01:18.555118Z",
+  "count": 4,
+  "recipes": [
+    {
+      "slug": "ebi-mayo",
+      "title": "海老マヨ",
+      "subtitle": "サーリーシャーチュウ／沙律蝦球／海老のマヨネーズ和え",
+      "summary": "香港・広東で生まれた海老の揚げ物にマヨネーズベースの甘酸っぱいソースを絡める一品です。コンデンスミルクと生クリームを加えることでまろやかなコクが出ます。",
+      "category": "メイン",
+      "region": [
+        "広東料理"
+      ],
+      "image": null,
+      "cooking_time": 15,
+      "servings": 4,
+      "plan": "normal",
+      "published_at": "2026-05-25T06:01:18.554813Z"
+    },
+    {
+      "slug": "mabo-dofu",
+      "title": "麻婆豆腐",
+      "subtitle": "マーボードウフ／鍋+本締で 熱々麻婆豆腐",
+      "summary": "豚バラ肉と豆板醤・甜麺醤・花山椒で作る香り豊かな麻婆あんを、煮汁で温めた豆腐にかけ、最後にオーブンでグツグツに仕上げる熱々の一品です。1人前=豆腐約100g・麻婆あん約80gが目安です。",
+      "category": "メイン",
+      "region": [
+        "四川料理"
+      ],
+      "image": null,
+      "cooking_time": 25,
+      "servings": 7,
+      "plan": "normal",
+      "published_at": "2026-05-25T06:01:18.554427Z"
+    },
+    {
+      "slug": "yurinchi",
+      "title": "油淋鶏",
+      "subtitle": "ユーリンチ／サクサク鶏の唐揚香味ソース",
+      "summary": "鶏もも肉を生姜・にんにくの効いた漬けダレに浸け、片栗粉をまぶして二度揚げした広東料理です。ねぎと生姜の香味ソースを熱々の鶏肉にたっぷり回しかけ、レタスと一緒にさっぱりと頂きます。",
+      "category": "メイン",
+      "region": [
+        "広東料理"
+      ],
+      "image": null,
+      "cooking_time": 20,
+      "servings": 5,
+      "plan": "normal",
+      "published_at": "2026-05-25T06:01:18.554092Z"
+    },
+    {
+      "slug": "hoikoro",
+      "title": "回鍋肉",
+      "subtitle": "ホイコーロー",
+      "summary": "四川を代表する家庭料理。一度湯通しした塩麹漬けの豚バラ肉をキャベツ・ピーマンと一緒に強火でさっと炒め、豆板醤と甜麺醤で甘辛く仕上げます。塩麹とはちみつでまろやかなコクが加わり、ご飯がすすむ一皿です。",
+      "category": "メイン",
+      "region": [
+        "四川料理"
+      ],
+      "image": null,
+      "cooking_time": 15,
+      "servings": 4,
+      "plan": "normal",
+      "published_at": "2026-05-25T06:01:18.553413Z"
+    }
+  ]
 }
