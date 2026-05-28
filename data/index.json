@@ -11,7 +11,7 @@
       "region": [
         "広東料理"
       ],
-      "image": null,
+      "image": "/public/images/ebi-mayo/main.jpg",
       "cooking_time": 15,
       "servings": 4,
       "plan": "normal",
@@ -26,7 +26,7 @@
       "region": [
         "四川料理"
       ],
-      "image": null,
+      "image": "/public/images/mabo-dofu/main.jpg",
       "cooking_time": 25,
       "servings": 7,
       "plan": "normal",
@@ -41,7 +41,7 @@
       "region": [
         "広東料理"
       ],
-      "image": null,
+      "image": "/public/images/yurinchi/main.jpg",
       "cooking_time": 20,
       "servings": 5,
       "plan": "normal",
@@ -56,7 +56,7 @@
       "region": [
         "四川料理"
       ],
-      "image": null,
+      "image": "/public/images/hoikoro/main.jpg",
       "cooking_time": 15,
       "servings": 4,
       "plan": "normal",
