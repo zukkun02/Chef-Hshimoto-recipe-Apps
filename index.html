@@ -19,25 +19,17 @@
   }
   .topbar-inner {
     max-width: 1080px; margin: 0 auto;
-    padding: 12px 20px;
-    display: flex; align-items: center; gap: 14px;
+    padding: 10px 20px;
+    display: flex; align-items: center; justify-content: center;
   }
   .brand {
-    display: flex; align-items: center; gap: 12px;
-    font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
-    font-size: 22px; font-weight: 600; letter-spacing: 0.06em;
-    color: var(--sumi);
+    display: flex; align-items: center;
+    text-decoration: none;
   }
   .brand .logo {
-    height: 44px; width: auto;
+    height: 70px; width: auto;
     display: block;
     mix-blend-mode: multiply;
-  }
-  .brand-text {
-    font-family: 'Shippori Mincho', serif;
-    font-size: 20px; font-weight: 600;
-    letter-spacing: 0.08em;
-    color: var(--sumi);
   }
 
   .container { max-width: 1080px; margin: 0 auto; padding: 24px 20px; }
@@ -428,9 +420,8 @@ function Header() {
   return (
     <header className="topbar">
       <div className="topbar-inner">
-        <a href="/" className="brand" onClick={(e) => { e.preventDefault(); window.scrollTo({top:0,behavior:'smooth'}); }} style={{textDecoration:'none'}}>
-          <img className="logo" src="/assets/logo.jpg" alt="happy food" />
-          <span className="brand-text">happy food</span>
+        <a href="/" className="brand" onClick={(e) => { e.preventDefault(); window.scrollTo({top:0,behavior:'smooth'}); }}>
+          <img className="logo" src="/assets/logo.jpg" alt="Happy Food Lab." />
         </a>
       </div>
     </header>
