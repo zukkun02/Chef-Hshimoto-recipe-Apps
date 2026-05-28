@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>つくる帖 — シェフのレシピサロン</title>
+<title>happy food</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="theme.css" />
 <style>
@@ -19,24 +19,25 @@
   }
   .topbar-inner {
     max-width: 1080px; margin: 0 auto;
-    padding: 18px 20px;
-    display: flex; align-items: baseline; gap: 16px;
+    padding: 12px 20px;
+    display: flex; align-items: center; gap: 14px;
   }
   .brand {
+    display: flex; align-items: center; gap: 12px;
     font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
-    font-size: 22px; font-weight: 600; letter-spacing: 0.08em;
+    font-size: 22px; font-weight: 600; letter-spacing: 0.06em;
     color: var(--sumi);
   }
-  .brand .seal {
-    display: inline-block;
-    background: var(--shu); color: var(--washi);
-    padding: 3px 10px; border-radius: 3px;
-    font-size: 16px; margin-right: 10px;
-    font-weight: 700; letter-spacing: 0.1em;
+  .brand .logo {
+    height: 44px; width: auto;
+    display: block;
+    mix-blend-mode: multiply;
   }
-  .tagline {
-    font-family: 'Noto Sans JP', sans-serif;
-    color: var(--sumi-3); font-size: 13px;
+  .brand-text {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 20px; font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--sumi);
   }
 
   .container { max-width: 1080px; margin: 0 auto; padding: 24px 20px; }
@@ -427,11 +428,10 @@ function Header() {
   return (
     <header className="topbar">
       <div className="topbar-inner">
-        <div className="brand">
-          <span className="seal">帖</span>
-          つくる帖
-        </div>
-        <div className="tagline">シェフのレシピサロン</div>
+        <a href="/" className="brand" onClick={(e) => { e.preventDefault(); window.scrollTo({top:0,behavior:'smooth'}); }} style={{textDecoration:'none'}}>
+          <img className="logo" src="/assets/logo.jpg" alt="happy food" />
+          <span className="brand-text">happy food</span>
+        </a>
       </div>
     </header>
   );
@@ -442,7 +442,7 @@ function MainImage({ src, title }) {
   if (!src || errored) {
     return (
       <div className="card-img card-img-fallback">
-        {(title || '帖').slice(0, 1)}
+        {(title || 'h').slice(0, 1)}
       </div>
     );
   }
@@ -512,7 +512,8 @@ function FilterChips({ label, options, selected, onToggle, variant }) {
 function EmptyState() {
   return (
     <div className="empty">
-      <div className="empty-icon">帖</div>
+      <img src="/assets/logo.jpg" alt="happy food"
+           style={{height: 80, marginBottom: 16, opacity: 0.6, mixBlendMode: 'multiply'}} />
       <h2>レシピを準備中です</h2>
       <p>
         橋本先生が手書きで残してきたレシピを、こちらに少しずつ並べていきます。<br/>
@@ -833,6 +834,11 @@ function App() {
       .then(d => setRecipes(d.recipes || []))
       .catch(() => setRecipes([]));
   }, []);
+
+  // 詳細→一覧へ戻ったときに必ず最上部までスクロール（検索バーが見える状態を担保）
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, [view.page, view.slug]);
 
   return (
     <div className="paper-wrap">
