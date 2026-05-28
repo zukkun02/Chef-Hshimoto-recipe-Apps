@@ -92,3 +92,18 @@ function githubListJSON(prefix) {
     .filter(f => f.type === 'file' && f.name.endsWith('.json'))
     .map(f => f.name);
 }
+
+/**
+ * Fetch a JSON file via GitHub Contents API (always fresh, no CDN cache).
+ * Returns parsed JSON or null on failure.
+ */
+function githubGetJSON(path) {
+  const url = `https://api.github.com/repos/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}`;
+  const r = UrlFetchApp.fetch(url, { headers: githubHeaders(), muteHttpExceptions: true });
+  if (r.getResponseCode() !== 200) return null;
+  const meta = JSON.parse(r.getContentText());
+  if (meta.encoding !== 'base64' || !meta.content) return null;
+  // base64 decode → JSON
+  const decoded = Utilities.newBlob(Utilities.base64Decode(meta.content)).getDataAsString('UTF-8');
+  return JSON.parse(decoded);
+}
