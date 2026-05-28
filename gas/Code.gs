@@ -93,10 +93,9 @@ function regenerateIndex() {
   for (const fn of files) {
     if (fn === '.gitkeep' || !fn.endsWith('.json')) continue;
     try {
-      const url = `https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/data/recipes/${fn}`;
-      const r = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
-      if (r.getResponseCode() !== 200) continue;
-      const recipe = JSON.parse(r.getContentText());
+      // GitHub Contents API（raw.github は CDN キャッシュで stale データになるため使わない）
+      const recipe = githubGetJSON(`data/recipes/${fn}`);
+      if (!recipe) continue;
       recipes.push({
         slug: recipe.slug,
         title: recipe.title,
