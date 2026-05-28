@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-05-28T23:46:12.467Z",
+  "updated_at": "2026-05-28T23:56:33.413Z",
   "count": 4,
   "recipes": [
     {
@@ -15,7 +15,7 @@
       "cooking_time": 20,
       "servings": 5,
       "plan": "normal",
-      "published_at": "2026-05-28T23:46:08.588Z"
+      "published_at": "2026-05-28T23:56:29.656Z"
     },
     {
       "slug": "hoikoro",
