@@ -40,29 +40,48 @@ function doPost(e) {
 
 /**
  * メイン処理：Notion ページからレシピを構築し、ステータスに応じて公開/非公開
+ *
+ * Notion の files プロパティは upload 完了まで非同期で反映が遅れるため、
+ * GAS が読みに行く前に少し待ち、画像が見えるまで最大 3 回までリトライする。
+ * これで「ボタン押下時の最新画像」がほぼ確実に取得できる。
  */
 function publishRecipe(pageId) {
-  const page = notionGetPage(pageId);
-  const recipe = parseRecipe(page);
+  // ① 初回待機（Notion の file upload が API に反映される時間）
+  Utilities.sleep(6000);
+
+  let page = notionGetPage(pageId);
+  let recipe = parseRecipe(page);
 
   if (!recipe.slug) {
     throw new Error('slug is empty — cannot publish without slug');
   }
 
-  if (recipe.status === '公開') {
-    const imagePath = mirrorImage(recipe);
-    if (imagePath) recipe.image = imagePath;
-    delete recipe.image_urls;
-    delete recipe.status;
-    githubUpsertJSON(`data/recipes/${recipe.slug}.json`, recipe);
-    regenerateIndex();
-    return { slug: recipe.slug, action: 'published' };
-  } else if (recipe.status === '非公開') {
+  // ② 公開判定だけは最初の取得で確定（status は file upload とは独立して即時反映される）
+  if (recipe.status === '非公開') {
     githubDeleteFile(`data/recipes/${recipe.slug}.json`);
     regenerateIndex();
     return { slug: recipe.slug, action: 'unpublished' };
   }
-  return { slug: recipe.slug, action: 'noop' };
+
+  if (recipe.status !== '公開') {
+    return { slug: recipe.slug, action: 'noop' };
+  }
+
+  // ③ 画像が見えるまでポーリング（最大 +12 秒）。最終的に見えなくても続行
+  for (let i = 0; i < 3 && (!recipe.image_urls || recipe.image_urls.length === 0); i++) {
+    Logger.log(`image not yet visible (try ${i + 1}), retrying after 4s`);
+    Utilities.sleep(4000);
+    page = notionGetPage(pageId);
+    recipe = parseRecipe(page);
+  }
+
+  const imagePath = mirrorImage(recipe);
+  if (imagePath) recipe.image = imagePath;
+  delete recipe.image_urls;
+  delete recipe.status;
+  githubUpsertJSON(`data/recipes/${recipe.slug}.json`, recipe);
+  regenerateIndex();
+  return { slug: recipe.slug, action: 'published', image: imagePath };
 }
 
 /**
