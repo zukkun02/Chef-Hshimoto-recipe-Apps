@@ -1,21 +1,21 @@
 {
-  "updated_at": "2026-05-28T23:09:32.058Z",
+  "updated_at": "2026-05-30T00:52:25.237Z",
   "count": 4,
   "recipes": [
     {
-      "slug": "ebi-mayo",
-      "title": "海老マヨ",
-      "subtitle": "サーリーシャーチュウ／沙律蝦球／海老のマヨネーズ和え",
-      "summary": "香港・広東で生まれた海老の揚げ物にマヨネーズベースの甘酸っぱいソースを絡める一品です。コンデンスミルクと生クリームを加えることでまろやかなコクが出ます。",
+      "slug": "yurinchi",
+      "title": "油淋鶏",
+      "subtitle": "ユーリンチ／サクサク鶏の唐揚香味ソース",
+      "summary": "鶏もも肉を生姜・にんにくの効いた漬けダレに浸け、片栗粉をまぶして二度揚げした広東料理です。ねぎと生姜の香味ソースを熱々の鶏肉にたっぷり回しかけ、レタスと一緒にさっぱりと頂きます。",
       "category": "メイン",
       "region": [
         "広東料理"
       ],
-      "image": "/public/images/ebi-mayo/main.jpg",
-      "cooking_time": 15,
-      "servings": 4,
+      "image": "/public/images/yurinchi/main.png",
+      "cooking_time": 20,
+      "servings": 5,
       "plan": "normal",
-      "published_at": "2026-05-28T23:04:36.401Z"
+      "published_at": "2026-05-30T00:52:21.424Z"
     },
     {
       "slug": "hoikoro",
@@ -30,7 +30,7 @@
       "cooking_time": 15,
       "servings": 4,
       "plan": "normal",
-      "published_at": "2026-05-28T22:57:07.897Z"
+      "published_at": "2026-05-28T23:28:32.962Z"
     },
     {
       "slug": "mabo-dofu",
@@ -45,22 +45,22 @@
       "cooking_time": 25,
       "servings": 7,
       "plan": "normal",
-      "published_at": "2026-05-25T06:01:18.554427Z"
+      "published_at": "2026-05-28T23:09:25.619Z"
     },
     {
-      "slug": "yurinchi",
-      "title": "油淋鶏",
-      "subtitle": "ユーリンチ／サクサク鶏の唐揚香味ソース",
-      "summary": "鶏もも肉を生姜・にんにくの効いた漬けダレに浸け、片栗粉をまぶして二度揚げした広東料理です。ねぎと生姜の香味ソースを熱々の鶏肉にたっぷり回しかけ、レタスと一緒にさっぱりと頂きます。",
+      "slug": "ebi-mayo",
+      "title": "海老マヨ",
+      "subtitle": "サーリーシャーチュウ／沙律蝦球／海老のマヨネーズ和え",
+      "summary": "香港・広東で生まれた海老の揚げ物にマヨネーズベースの甘酸っぱいソースを絡める一品です。コンデンスミルクと生クリームを加えることでまろやかなコクが出ます。",
       "category": "メイン",
       "region": [
         "広東料理"
       ],
-      "image": "/public/images/yurinchi/main.jpg",
-      "cooking_time": 20,
-      "servings": 5,
+      "image": "/public/images/ebi-mayo/main.jpg",
+      "cooking_time": 15,
+      "servings": 4,
       "plan": "normal",
-      "published_at": "2026-05-25T06:01:18.554092Z"
+      "published_at": "2026-05-28T23:06:03.221Z"
     }
   ]
 }
