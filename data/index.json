@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-05-30T00:52:25.237Z",
+  "updated_at": "2026-05-30T00:58:55.130Z",
   "count": 4,
   "recipes": [
     {
@@ -11,11 +11,11 @@
       "region": [
         "広東料理"
       ],
-      "image": "/public/images/yurinchi/main.png",
+      "image": "/public/images/yurinchi/main.jpg",
       "cooking_time": 20,
       "servings": 5,
       "plan": "normal",
-      "published_at": "2026-05-30T00:52:21.424Z"
+      "published_at": "2026-05-30T00:58:51.146Z"
     },
     {
       "slug": "hoikoro",
