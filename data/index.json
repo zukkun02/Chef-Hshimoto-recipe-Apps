@@ -1,7 +1,22 @@
 {
-  "updated_at": "2026-05-31T02:24:14.952Z",
+  "updated_at": "2026-05-31T02:25:45.420Z",
   "count": 4,
   "recipes": [
+    {
+      "slug": "ebi-mayo",
+      "title": "海老マヨ",
+      "subtitle": "サーリーシャーチュウ／沙律蝦球／海老のマヨネーズ和え",
+      "summary": "香港・広東で生まれた海老の揚げ物にマヨネーズベースの甘酸っぱいソースを絡める一品です。コンデンスミルクと生クリームを加えることでまろやかなコクが出ます。",
+      "category": "メイン",
+      "region": [
+        "広東料理"
+      ],
+      "image": "/public/images/ebi-mayo/main.jpg",
+      "cooking_time": 15,
+      "servings": 4,
+      "plan": "normal",
+      "published_at": "2026-05-31T02:25:42.287Z"
+    },
     {
       "slug": "mabo-dofu",
       "title": "麻婆豆腐",
@@ -46,21 +61,6 @@
       "servings": 4,
       "plan": "normal",
       "published_at": "2026-05-31T02:23:34.587Z"
-    },
-    {
-      "slug": "ebi-mayo",
-      "title": "海老マヨ",
-      "subtitle": "サーリーシャーチュウ／沙律蝦球／海老のマヨネーズ和え",
-      "summary": "香港・広東で生まれた海老の揚げ物にマヨネーズベースの甘酸っぱいソースを絡める一品です。コンデンスミルクと生クリームを加えることでまろやかなコクが出ます。",
-      "category": "メイン",
-      "region": [
-        "広東料理"
-      ],
-      "image": "/public/images/ebi-mayo/main.jpg",
-      "cooking_time": 15,
-      "servings": 4,
-      "plan": "normal",
-      "published_at": "2026-05-28T23:06:03.221Z"
     }
   ]
 }
