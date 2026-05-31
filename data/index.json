@@ -1,7 +1,22 @@
 {
-  "updated_at": "2026-05-31T02:23:42.058Z",
+  "updated_at": "2026-05-31T02:23:55.907Z",
   "count": 4,
   "recipes": [
+    {
+      "slug": "yurinchi",
+      "title": "油淋鶏",
+      "subtitle": "ユーリンチ／サクサク鶏の唐揚香味ソース",
+      "summary": "鶏もも肉を生姜・にんにくの効いた漬けダレに浸け、片栗粉をまぶして二度揚げした広東料理です。ねぎと生姜の香味ソースを熱々の鶏肉にたっぷり回しかけ、レタスと一緒にさっぱりと頂きます。",
+      "category": "メイン",
+      "region": [
+        "広東料理"
+      ],
+      "image": "/public/images/yurinchi/main.jpg",
+      "cooking_time": 20,
+      "servings": 5,
+      "plan": "normal",
+      "published_at": "2026-05-31T02:23:51.887Z"
+    },
     {
       "slug": "hoikoro",
       "title": "回鍋肉",
@@ -16,21 +31,6 @@
       "servings": 4,
       "plan": "normal",
       "published_at": "2026-05-31T02:23:34.587Z"
-    },
-    {
-      "slug": "yurinchi",
-      "title": "油淋鶏",
-      "subtitle": "ユーリンチ／サクサク鶏の唐揚香味ソース",
-      "summary": "鶏もも肉を生姜・にんにくの効いた漬けダレに浸け、片栗粉をまぶして二度揚げした広東料理です。ねぎと生姜の香味ソースを熱々の鶏肉にたっぷり回しかけ、レタスと一緒にさっぱりと頂きます。",
-      "category": "メイン",
-      "region": [
-        "広東料理"
-      ],
-      "image": "/public/images/yurinchi/main.jpg",
-      "cooking_time": 20,
-      "servings": 5,
-      "plan": "normal",
-      "published_at": "2026-05-30T00:58:51.146Z"
     },
     {
       "slug": "mabo-dofu",
