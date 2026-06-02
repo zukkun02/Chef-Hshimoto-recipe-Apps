@@ -685,7 +685,6 @@ function Detail({ slug, onBack }) {
           <div className="meta-row">
             {recipe.cooking_time != null && <div><span className="label">調理時間</span>{recipe.cooking_time}分</div>}
             {recipe.servings != null && <div><span className="label">人数</span>{recipe.servings}人分</div>}
-            {recipe.source_year_month && <div><span className="label">原典</span>{recipe.source_year_month}</div>}
           </div>
 
           {hasSteps && (

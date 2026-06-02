@@ -55,7 +55,6 @@ function parseRecipe(page) {
     servings: getNum('人数分'),
     chef_comment_md: getRT('シェフコメント'),
     origin_column_md: getRT('料理の由来・コラム'),
-    source_year_month: (getDate('原典作成年月') || '').slice(0, 7) || null,
     plan: getSelect('公開プラン') || 'normal',
     status: getSelect('公開ステータス'),
     published_at: new Date().toISOString()
