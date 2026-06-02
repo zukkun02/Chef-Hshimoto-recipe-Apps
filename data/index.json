@@ -1,7 +1,22 @@
 {
-  "updated_at": "2026-06-02T04:46:41.914Z",
+  "updated_at": "2026-06-02T04:48:19.056Z",
   "count": 4,
   "recipes": [
+    {
+      "slug": "mabo-dofu",
+      "title": "麻婆豆腐",
+      "subtitle": "マーボードウフ／鍋+本締で 熱々麻婆豆腐",
+      "summary": "豚バラ肉と豆板醤・甜麺醤・花山椒で作る香り豊かな麻婆あんを、煮汁で温めた豆腐にかけ、最後にオーブンでグツグツに仕上げる熱々の一品です。",
+      "category": "メイン",
+      "region": [
+        "四川料理"
+      ],
+      "image": "/public/images/mabo-dofu/main.jpg",
+      "cooking_time": 25,
+      "servings": 6,
+      "plan": "normal",
+      "published_at": "2026-06-02T04:48:12.204Z"
+    },
     {
       "slug": "ebi-mayo",
       "title": "海老マヨ",
@@ -16,21 +31,6 @@
       "servings": 4,
       "plan": "normal",
       "published_at": "2026-06-02T04:46:38.444Z"
-    },
-    {
-      "slug": "mabo-dofu",
-      "title": "麻婆豆腐",
-      "subtitle": "マーボードウフ／鍋+本締で 熱々麻婆豆腐",
-      "summary": "豚バラ肉と豆板醤・甜麺醤・花山椒で作る香り豊かな麻婆あんを、煮汁で温めた豆腐にかけ、最後にオーブンでグツグツに仕上げる熱々の一品です。1人前=豆腐約100g・麻婆あん約80gが目安です。",
-      "category": "メイン",
-      "region": [
-        "四川料理"
-      ],
-      "image": "/public/images/mabo-dofu/main.jpg",
-      "cooking_time": 25,
-      "servings": 7,
-      "plan": "normal",
-      "published_at": "2026-05-31T02:24:09.264Z"
     },
     {
       "slug": "yurinchi",
