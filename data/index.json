@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-02T04:48:54.907Z",
+  "updated_at": "2026-06-02T04:50:18.173Z",
   "count": 4,
   "recipes": [
     {
@@ -15,7 +15,7 @@
       "cooking_time": 20,
       "servings": 5,
       "plan": "normal",
-      "published_at": "2026-06-02T04:48:50.913Z"
+      "published_at": "2026-06-02T04:50:14.184Z"
     },
     {
       "slug": "mabo-dofu",
