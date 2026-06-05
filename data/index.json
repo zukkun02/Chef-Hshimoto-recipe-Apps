@@ -1,7 +1,22 @@
 {
-  "updated_at": "2026-06-02T04:52:48.443Z",
-  "count": 4,
+  "updated_at": "2026-06-05T00:45:28.860Z",
+  "count": 5,
   "recipes": [
+    {
+      "slug": "beef-stew",
+      "title": "ビーフシチュー",
+      "subtitle": "ビーフシチュー",
+      "summary": "牛頬肉を赤ワインと香味野菜でじっくり煮込んだクラシックな洋食メニューです。120℃のオーブンで合計3時間ほどかけて加熱することで、頬肉がほろっと柔らかく仕上がります。あらごしトマトとりんご、中濃ソースで深いコクと自然な甘みを引き出した一皿です。",
+      "category": "メイン",
+      "region": [
+        "洋食"
+      ],
+      "image": "/public/images/beef-stew/main.jpg",
+      "cooking_time": 180,
+      "servings": 6,
+      "plan": "normal",
+      "published_at": "2026-06-05T00:45:23.860Z"
+    },
     {
       "slug": "hoikoro",
       "title": "回鍋肉",
