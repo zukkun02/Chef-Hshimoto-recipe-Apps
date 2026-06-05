@@ -1,7 +1,22 @@
 {
-  "updated_at": "2026-06-05T00:45:28.860Z",
+  "updated_at": "2026-06-05T01:27:35.063Z",
   "count": 5,
   "recipes": [
+    {
+      "slug": "hoikoro",
+      "title": "回鍋肉",
+      "subtitle": "ホイコーロー",
+      "summary": "四川を代表する家庭料理。一度湯通しした塩麹漬けの豚バラ肉をキャベツ・ピーマンと一緒に強火でさっと炒め、豆板醤と甜麺醤で甘辛く仕上げます。塩麹とはちみつでまろやかなコクが加わり、ご飯がすすむ一皿です。",
+      "category": "メイン",
+      "region": [
+        "四川料理"
+      ],
+      "image": "/public/images/hoikoro/main.jpg",
+      "cooking_time": 15,
+      "servings": 4,
+      "plan": "normal",
+      "published_at": "2026-06-05T01:27:31.526Z"
+    },
     {
       "slug": "beef-stew",
       "title": "ビーフシチュー",
@@ -16,21 +31,6 @@
       "servings": 6,
       "plan": "normal",
       "published_at": "2026-06-05T00:45:23.860Z"
-    },
-    {
-      "slug": "hoikoro",
-      "title": "回鍋肉",
-      "subtitle": "ホイコーロー",
-      "summary": "四川を代表する家庭料理。一度湯通しした塩麹漬けの豚バラ肉をキャベツ・ピーマンと一緒に強火でさっと炒め、豆板醤と甜麺醤で甘辛く仕上げます。塩麹とはちみつでまろやかなコクが加わり、ご飯がすすむ一皿です。",
-      "category": "メイン",
-      "region": [
-        "四川料理"
-      ],
-      "image": "/public/images/hoikoro/main.jpg",
-      "cooking_time": 15,
-      "servings": 4,
-      "plan": "normal",
-      "published_at": "2026-06-02T04:52:39.498Z"
     },
     {
       "slug": "yurinchi",
